@@ -107,8 +107,8 @@ class RecognizerGCNTwoHead(BaseRecognizer):
         keypoint = keypoint.reshape((bs * nc, ) + keypoint.shape[2:])
 
         x = self.extract_feat(keypoint)
-        pooled = self._pool_backbone_features(pooled)
-        phase_score = self.phase_head(x)
+        pooled = self._pool_backbone_features(x)
+        phase_score = self.phase_head(pooled)
         phase_probs = torch.softmax(phase_score, dim=-1)
 
 
